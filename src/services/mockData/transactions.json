@@ -1,0 +1,74 @@
+[
+  {
+    "Id": 1,
+    "propertyAddress": "1234 Oak Street, Beverly Hills, CA 90210",
+    "transactionType": "Sale",
+    "status": "In Progress",
+    "estimatedClosingDate": "2024-02-15",
+    "createdAt": "2024-01-05",
+    "updatedAt": "2024-01-10"
+  },
+  {
+    "Id": 2,
+    "propertyAddress": "567 Pine Avenue, Santa Monica, CA 90401",
+    "transactionType": "Purchase",
+    "status": "Under Contract",
+    "estimatedClosingDate": "2024-02-28",
+    "createdAt": "2024-01-08",
+    "updatedAt": "2024-01-12"
+  },
+  {
+    "Id": 3,
+    "propertyAddress": "890 Maple Drive, West Hollywood, CA 90069",
+    "transactionType": "Lease",
+    "status": "New",
+    "estimatedClosingDate": "2024-03-10",
+    "createdAt": "2024-01-12",
+    "updatedAt": "2024-01-12"
+  },
+  {
+    "Id": 4,
+    "propertyAddress": "321 Sunset Boulevard, Los Angeles, CA 90028",
+    "transactionType": "Sale",
+    "status": "Closing",
+    "estimatedClosingDate": "2024-02-05",
+    "createdAt": "2023-12-15",
+    "updatedAt": "2024-01-08"
+  },
+  {
+    "Id": 5,
+    "propertyAddress": "654 Venice Beach Walk, Venice, CA 90291",
+    "transactionType": "Purchase",
+    "status": "Completed",
+    "estimatedClosingDate": "2024-01-20",
+    "createdAt": "2023-12-01",
+    "updatedAt": "2024-01-20"
+  },
+  {
+    "Id": 6,
+    "propertyAddress": "987 Rodeo Drive, Beverly Hills, CA 90210",
+    "transactionType": "Sale",
+    "status": "In Progress",
+    "estimatedClosingDate": "2024-03-15",
+    "createdAt": "2024-01-15",
+    "updatedAt": "2024-01-18"
+  },
+  {
+    "Id": 7,
+    "propertyAddress": "456 Melrose Avenue, Los Angeles, CA 90038",
+    "transactionType": "Lease",
+    "status": "Under Contract",
+    "estimatedClosingDate": "2024-02-20",
+    "createdAt": "2024-01-03",
+    "updatedAt": "2024-01-15"
+  },
+  {
+    "Id": 8,
+    "propertyAddress": "159 Highland Avenue, Manhattan Beach, CA 90266",
+    "transactionType": "Purchase",
+    "status": "New",
+    "estimatedClosingDate": "2024-03-25",
+    "createdAt": "2024-01-20",
+    "updatedAt": "2024-01-20"
+  }
+]
