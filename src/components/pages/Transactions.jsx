@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { transactionService } from "@/services/api/transactionService";
+import TransactionDetailModal from "@/components/organisms/TransactionDetailModal";
+import ApperIcon from "@/components/ApperIcon";
 import TransactionCard from "@/components/molecules/TransactionCard";
 import Loading from "@/components/ui/Loading";
 import Error from "@/components/ui/Error";
 import Empty from "@/components/ui/Empty";
 import Button from "@/components/atoms/Button";
-import ApperIcon from "@/components/ApperIcon";
 
 const Transactions = () => {
   const [transactions, setTransactions] = useState([]);
@@ -14,6 +15,8 @@ const Transactions = () => {
   const [error, setError] = useState("");
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTransaction, setSelectedTransaction] = useState(null);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
   const loadTransactions = async () => {
     try {
@@ -120,13 +123,19 @@ const Transactions = () => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {filteredTransactions.map((transaction, index) => (
-            <motion.div
+<motion.div
               key={transaction.Id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 * index }}
             >
-              <TransactionCard transaction={transaction} />
+              <TransactionCard
+                transaction={transaction} 
+                onClick={(transaction) => {
+                  setSelectedTransaction(transaction);
+                  setIsDetailModalOpen(true);
+                }}
+              />
             </motion.div>
           ))}
         </motion.div>
@@ -143,8 +152,18 @@ const Transactions = () => {
           Showing {filteredTransactions.length} of {transactions.length} transactions
           {searchTerm && ` matching "${searchTerm}"`}
           {filter !== "all" && ` with status "${statusFilters.find(f => f.value === filter)?.label}"`}
-        </motion.div>
+</motion.div>
       )}
+
+      {/* Transaction Detail Modal */}
+      <TransactionDetailModal
+        isOpen={isDetailModalOpen}
+        onClose={() => {
+          setIsDetailModalOpen(false);
+          setSelectedTransaction(null);
+        }}
+        transaction={selectedTransaction}
+      />
     </div>
   );
 };

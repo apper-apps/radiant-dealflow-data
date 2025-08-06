@@ -22,10 +22,10 @@ const TransactionCard = ({ transaction, onClick }) => {
     }
   };
 
-  return (
+return (
     <Card 
       hover 
-      className="cursor-pointer transition-all duration-200"
+      className="cursor-pointer transition-all duration-200 hover:shadow-lg"
       onClick={() => onClick && onClick(transaction)}
     >
       <div className="flex items-start justify-between mb-3">
