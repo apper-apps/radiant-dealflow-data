@@ -45,11 +45,19 @@ const mainRoutes = [
       </SuspenseWrapper>
 ),
   },
-  {
+{
     path: "documents",
     element: (
       <SuspenseWrapper>
         <Documents />
+      </SuspenseWrapper>
+    ),
+  },
+  {
+    path: "dashboard",
+    element: (
+      <SuspenseWrapper>
+        <Dashboard />
       </SuspenseWrapper>
     ),
   },
