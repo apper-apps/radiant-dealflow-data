@@ -4,9 +4,10 @@ import SidebarItem from "@/components/molecules/SidebarItem";
 import ApperIcon from "@/components/ApperIcon";
 
 const Sidebar = ({ isOpen, onClose }) => {
-  const sidebarItems = [
+const sidebarItems = [
     { to: "/dashboard", icon: "LayoutDashboard", label: "Dashboard" },
-    { to: "/transactions", icon: "FileText", label: "Transactions" }
+    { to: "/transactions", icon: "FileText", label: "Transactions" },
+    { to: "/documents", icon: "FileImage", label: "Documents" }
   ];
 
   // Desktop sidebar

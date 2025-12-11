@@ -5,6 +5,7 @@ import Layout from '@/components/organisms/Layout';
 // Lazy load page components
 const Dashboard = lazy(() => import('@/components/pages/Dashboard'));
 const Transactions = lazy(() => import('@/components/pages/Transactions'));
+const Documents = lazy(() => import('@/components/pages/Documents'));
 
 // Loading fallback component
 const LoadingFallback = () => (
@@ -41,6 +42,14 @@ const mainRoutes = [
     element: (
       <SuspenseWrapper>
         <Transactions />
+      </SuspenseWrapper>
+),
+  },
+  {
+    path: "documents",
+    element: (
+      <SuspenseWrapper>
+        <Documents />
       </SuspenseWrapper>
     ),
   },

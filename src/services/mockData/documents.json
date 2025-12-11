@@ -1,0 +1,29 @@
+{
+  "1-purchase_sale_contracts": [
+    {
+      "id": 1,
+      "filename": "purchase_agreement_123_main_st.pdf",
+      "originalName": "purchase_agreement_123_main_st.pdf",
+      "size": 245760,
+      "uploadDate": "2024-01-15T10:30:00Z"
+    }
+  ],
+  "1-appraisals": [
+    {
+      "id": 2,
+      "filename": "appraisal_report_123_main_st.pdf",
+      "originalName": "appraisal_report_123_main_st.pdf", 
+      "size": 512000,
+      "uploadDate": "2024-01-20T14:15:00Z"
+    }
+  ],
+  "2-inspections": [
+    {
+      "id": 3,
+      "filename": "home_inspection_456_oak_ave.pdf",
+      "originalName": "home_inspection_456_oak_ave.pdf",
+      "size": 1024000,
+      "uploadDate": "2024-01-18T09:45:00Z"
+    }
+  ]
+}

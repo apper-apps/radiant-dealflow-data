@@ -359,8 +359,34 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
                           </label>
                           <p className="text-gray-900 whitespace-pre-wrap">{formData.notes}</p>
                         </div>
-                      )
+)
                     )}
+                  </div>
+
+                  {/* Documents Section */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-medium text-gray-900">Documents</h3>
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <ApperIcon name="FileImage" size={20} className="text-gray-600" />
+                          <span className="text-sm text-gray-700">
+                            Manage transaction documents
+                          </span>
+                        </div>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            window.open(`/documents#transaction-${transaction.Id}`, '_blank');
+                          }}
+                          className="flex items-center space-x-2"
+                        >
+                          <ApperIcon name="ExternalLink" size={16} />
+                          <span>View Documents</span>
+                        </Button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -11,8 +11,10 @@ const Header = ({ onMenuToggle, onCreateTransaction }) => {
       case "/":
       case "/dashboard":
         return "Dashboard";
-      case "/transactions":
+case "/transactions":
         return "Transactions";
+      case "/documents":
+        return "Documents";
       default:
         return "DealFlow";
     }
