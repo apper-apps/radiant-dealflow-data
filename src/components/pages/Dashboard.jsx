@@ -132,14 +132,16 @@ const Dashboard = () => {
           />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-            {recentTransactions.map((transaction, index) => (
+{recentTransactions.map((transaction, index) => (
               <motion.div
                 key={transaction.Id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
               >
-                <TransactionCard transaction={transaction} />
+                <TransactionCard 
+                  transaction={transaction}
+                />
               </motion.div>
             ))}
           </div>

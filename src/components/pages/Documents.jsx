@@ -17,11 +17,12 @@ const Documents = () => {
   const [error, setError] = useState("");
   const [uploadingFiles, setUploadingFiles] = useState({});
 
-  const documentTypes = [
+const documentTypes = [
     { id: "purchase_sale_contracts", name: "Purchase & Sale Contracts", icon: "FileContract" },
     { id: "appraisals", name: "Appraisals", icon: "TrendingUp" },
     { id: "inspections", name: "Inspections", icon: "Search" },
     { id: "settlement_statements", name: "Settlement Statements", icon: "Calculator" },
+    { id: "photos", name: "Photos", icon: "Image" },
     { id: "miscellaneous", name: "Miscellaneous", icon: "FolderOpen" }
   ];
 

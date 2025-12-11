@@ -1,5 +1,4 @@
 import documentsData from "@/services/mockData/documents.json";
-
 // Simulate API delay
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -76,7 +75,7 @@ export const documentService = {
     throw new Error("Document not found");
   },
 
-  async getStats() {
+async getStats() {
     await delay(200);
     const stats = {
       totalDocuments: 0,
@@ -85,7 +84,8 @@ export const documentService = {
         appraisals: 0,
         inspections: 0,
         settlement_statements: 0,
-        miscellaneous: 0
+        miscellaneous: 0,
+        photos: 0
       },
       byTransaction: {}
     };

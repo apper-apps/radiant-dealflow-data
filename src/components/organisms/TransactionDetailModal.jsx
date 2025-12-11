@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "react-toastify";
 import { format } from "date-fns";
 import { transactionService } from "@/services/api/transactionService";
-import Button from "@/components/atoms/Button";
-import FormField from "@/components/molecules/FormField";
-import Badge from "@/components/atoms/Badge";
 import ApperIcon from "@/components/ApperIcon";
+import FormField from "@/components/molecules/FormField";
+import Documents from "@/components/pages/Documents";
+import Button from "@/components/atoms/Button";
+import Badge from "@/components/atoms/Badge";
 
 const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -438,7 +439,7 @@ if (!formData.propertyName.trim()) {
                     )}
                   </div>
 
-                  {/* Documents Section */}
+{/* Documents Section */}
                   <div className="space-y-4">
                     <h3 className="text-lg font-medium text-gray-900">Documents</h3>
                     <div className="bg-gray-50 rounded-lg p-4">
@@ -460,6 +461,165 @@ if (!formData.propertyName.trim()) {
                           <ApperIcon name="ExternalLink" size={16} />
                           <span>View Documents</span>
                         </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Photos Section */}
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-medium text-gray-900">Photos</h3>
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="file"
+                          accept="image/jpeg,image/jpg,image/png"
+                          multiple
+                          className="hidden"
+                          id="photo-upload"
+                          onChange={(e) => {
+                            const files = Array.from(e.target.files);
+                            files.forEach(file => {
+                              // Handle photo upload using existing document service
+                              const reader = new FileReader();
+                              reader.onload = async (event) => {
+                                try {
+                                  const formData = new FormData();
+                                  formData.append('file', file);
+                                  formData.append('transactionId', transaction.Id);
+                                  formData.append('documentType', 'photos');
+                                  
+                                  // Use existing upload edge function
+                                  const response = await fetch(`/api/upload-document`, {
+                                    method: 'POST',
+                                    body: formData
+                                  });
+                                  
+                                  if (response.ok) {
+                                    toast.success(`Photo ${file.name} uploaded successfully!`);
+                                    setTimeout(() => window.location.reload(), 1000);
+                                  } else {
+                                    throw new Error('Upload failed');
+                                  }
+                                } catch (error) {
+                                  toast.error(`Failed to upload ${file.name}`);
+                                  console.error('Photo upload error:', error);
+                                }
+                              };
+                              reader.readAsDataURL(file);
+                            });
+                            e.target.value = '';
+                          }}
+                        />
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => document.getElementById('photo-upload').click()}
+                          className="flex items-center space-x-2"
+                        >
+                          <ApperIcon name="Upload" size={16} />
+                          <span>Upload</span>
+                        </Button>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                              const video = document.createElement('video');
+                              const canvas = document.createElement('canvas');
+                              const ctx = canvas.getContext('2d');
+                              
+                              navigator.mediaDevices.getUserMedia({ video: true })
+                                .then(stream => {
+                                  video.srcObject = stream;
+                                  video.play();
+                                  
+                                  // Create camera modal
+                                  const modal = document.createElement('div');
+                                  modal.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4';
+                                  modal.innerHTML = `
+                                    <div class="bg-white rounded-lg p-6 max-w-md w-full">
+                                      <h3 class="text-lg font-medium mb-4">Take Photo</h3>
+                                      <video autoplay class="w-full mb-4 rounded-lg"></video>
+                                      <div class="flex space-x-2">
+                                        <button id="capture-btn" class="flex-1 bg-primary text-white px-4 py-2 rounded-lg">Capture</button>
+                                        <button id="cancel-btn" class="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded-lg">Cancel</button>
+                                      </div>
+                                    </div>
+                                  `;
+                                  
+                                  const modalVideo = modal.querySelector('video');
+                                  modalVideo.srcObject = stream;
+                                  
+                                  modal.querySelector('#capture-btn').onclick = () => {
+                                    canvas.width = video.videoWidth;
+                                    canvas.height = video.videoHeight;
+ctx.drawImage(video, 0, 0);
+                                    
+                                    canvas.toBlob(async (blob) => {
+                                      // Create File object with fallback for older browsers
+                                      let file;
+                                      try {
+                                        file = new File([blob], `photo-${Date.now()}.jpg`, { type: 'image/jpeg' });
+                                      } catch (e) {
+                                        // Fallback for browsers that don't support File constructor
+                                        file = blob;
+                                        file.name = `photo-${Date.now()}.jpg`;
+                                        file.lastModified = Date.now();
+                                      }
+                                      
+                                      try {
+                                        const formData = new FormData();
+                                        formData.append('file', file);
+                                        formData.append('transactionId', transaction.Id);
+                                        formData.append('documentType', 'photos');
+                                        
+                                        const response = await fetch(`/api/upload-document`, {
+                                          method: 'POST',
+                                          body: formData
+                                        });
+                                        
+                                        if (response.ok) {
+                                          toast.success('Photo captured and uploaded successfully!');
+                                          setTimeout(() => window.location.reload(), 1000);
+                                        } else {
+                                          throw new Error('Upload failed');
+                                        }
+                                      } catch (error) {
+                                        toast.error('Failed to upload photo');
+                                        console.error('Photo upload error:', error);
+                                      }
+                                      
+                                      stream.getTracks().forEach(track => track.stop());
+                                      document.body.removeChild(modal);
+                                    }, 'image/jpeg', 0.8);
+                                  };
+                                  
+                                  modal.querySelector('#cancel-btn').onclick = () => {
+                                    stream.getTracks().forEach(track => track.stop());
+                                    document.body.removeChild(modal);
+                                  };
+                                  
+                                  document.body.appendChild(modal);
+                                })
+                                .catch(error => {
+                                  toast.error('Camera access denied or not available');
+                                  console.error('Camera error:', error);
+                                });
+                            } else {
+                              toast.error('Camera not supported on this device');
+                            }
+                          }}
+                          className="flex items-center space-x-2"
+                        >
+                          <ApperIcon name="Camera" size={16} />
+                          <span>Camera</span>
+                        </Button>
+                      </div>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <div className="flex items-center justify-center text-gray-500">
+                        <ApperIcon name="Image" size={24} className="mr-2" />
+                        <span className="text-sm">Photos will appear here after upload</span>
                       </div>
                     </div>
                   </div>

@@ -7,6 +7,7 @@ const Sidebar = ({ isOpen, onClose }) => {
 const sidebarItems = [
     { to: "/dashboard", icon: "LayoutDashboard", label: "Dashboard" },
     { to: "/transactions", icon: "FileText", label: "Transactions" },
+    { to: "/projects", icon: "Home", label: "Projects" },
     { to: "/documents", icon: "FileImage", label: "Documents" }
   ];
 

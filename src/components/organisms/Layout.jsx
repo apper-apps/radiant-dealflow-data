@@ -3,7 +3,6 @@ import { Outlet, useOutletContext } from "react-router-dom";
 import Sidebar from "@/components/organisms/Sidebar";
 import Header from "@/components/organisms/Header";
 import CreateTransactionModal from "@/components/organisms/CreateTransactionModal";
-
 const Layout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);

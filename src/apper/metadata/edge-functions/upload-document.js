@@ -110,12 +110,13 @@ export default apper.serve(async (request) => {
       });
     }
 
-    // Validate document type
+// Validate document type
     const validDocTypes = [
       'purchase_sale_contracts', 
       'appraisals', 
       'inspections', 
       'settlement_statements', 
+      'photos',
       'miscellaneous'
     ];
     

@@ -22,11 +22,22 @@ const TransactionCard = ({ transaction, onClick }) => {
     }
   };
 
-return (
+const handleCardClick = () => {
+    if (onClick) {
+      onClick(transaction);
+    }
+  };
+
+  const handleNameClick = (e) => {
+    e.stopPropagation();
+    window.location.href = `/projects/${transaction.Id}`;
+  };
+
+  return (
     <Card 
       hover 
       className="cursor-pointer transition-all duration-200 hover:shadow-lg"
-      onClick={() => onClick && onClick(transaction)}
+      onClick={handleCardClick}
     >
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center space-x-3">

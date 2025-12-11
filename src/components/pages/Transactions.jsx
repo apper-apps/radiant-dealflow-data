@@ -155,7 +155,7 @@ const Transactions = () => {
 </motion.div>
       )}
 
-      {/* Transaction Detail Modal */}
+{/* Transaction Detail Modal */}
       <TransactionDetailModal
         isOpen={isDetailModalOpen}
         onClose={() => {

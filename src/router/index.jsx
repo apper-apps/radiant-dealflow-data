@@ -5,8 +5,8 @@ import Layout from '@/components/organisms/Layout';
 // Lazy load page components
 const Dashboard = lazy(() => import('@/components/pages/Dashboard'));
 const Transactions = lazy(() => import('@/components/pages/Transactions'));
+const ProjectDetails = lazy(() => import('@/components/pages/ProjectDetails'));
 const Documents = lazy(() => import('@/components/pages/Documents'));
-
 // Loading fallback component
 const LoadingFallback = () => (
   <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -44,8 +44,16 @@ const mainRoutes = [
         <Transactions />
       </SuspenseWrapper>
 ),
+},
+  {
+    path: "projects/:id",
+    element: (
+      <SuspenseWrapper>
+        <ProjectDetails />
+      </SuspenseWrapper>
+    ),
   },
-{
+  {
     path: "documents",
     element: (
       <SuspenseWrapper>
