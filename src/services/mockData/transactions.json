@@ -1,7 +1,10 @@
 [
   {
     "Id": 1,
+    "propertyName": "Beverly Hills Estate",
     "propertyAddress": "1234 Oak Street, Beverly Hills, CA 90210",
+    "propertyPurchaseDate": "2023-11-15",
+    "propertyStatus": "Listed",
     "transactionType": "Sale",
     "status": "In Progress",
     "estimatedClosingDate": "2024-02-15",
@@ -10,7 +13,10 @@
   },
   {
     "Id": 2,
+    "propertyName": "Santa Monica Condo",
     "propertyAddress": "567 Pine Avenue, Santa Monica, CA 90401",
+    "propertyPurchaseDate": "2023-12-01",
+    "propertyStatus": "Pending - purchase",
     "transactionType": "Purchase",
     "status": "Under Contract",
     "estimatedClosingDate": "2024-02-28",
@@ -19,7 +25,10 @@
   },
   {
     "Id": 3,
+    "propertyName": "West Hollywood Apartment",
     "propertyAddress": "890 Maple Drive, West Hollywood, CA 90069",
+    "propertyPurchaseDate": "2023-10-20",
+    "propertyStatus": "Rehab",
     "transactionType": "Lease",
     "status": "New",
     "estimatedClosingDate": "2024-03-10",
@@ -28,7 +37,10 @@
   },
   {
     "Id": 4,
+    "propertyName": "Sunset Strip Loft",
     "propertyAddress": "321 Sunset Boulevard, Los Angeles, CA 90028",
+    "propertyPurchaseDate": "2023-09-05",
+    "propertyStatus": "Listed",
     "transactionType": "Sale",
     "status": "Closing",
     "estimatedClosingDate": "2024-02-05",
@@ -37,7 +49,10 @@
   },
   {
     "Id": 5,
+    "propertyName": "Venice Beach House",
     "propertyAddress": "654 Venice Beach Walk, Venice, CA 90291",
+    "propertyPurchaseDate": "2023-08-12",
+    "propertyStatus": "Pending - sale",
     "transactionType": "Purchase",
     "status": "Completed",
     "estimatedClosingDate": "2024-01-20",
@@ -46,7 +61,10 @@
   },
   {
     "Id": 6,
+    "propertyName": "Rodeo Drive Boutique",
     "propertyAddress": "987 Rodeo Drive, Beverly Hills, CA 90210",
+    "propertyPurchaseDate": "2023-11-28",
+    "propertyStatus": "Listed",
     "transactionType": "Sale",
     "status": "In Progress",
     "estimatedClosingDate": "2024-03-15",
@@ -55,7 +73,10 @@
   },
   {
     "Id": 7,
+    "propertyName": "Melrose Avenue Studio",
     "propertyAddress": "456 Melrose Avenue, Los Angeles, CA 90038",
+    "propertyPurchaseDate": "2023-10-08",
+    "propertyStatus": "Rehab",
     "transactionType": "Lease",
     "status": "Under Contract",
     "estimatedClosingDate": "2024-02-20",
@@ -64,7 +85,10 @@
   },
   {
     "Id": 8,
+    "propertyName": "Manhattan Beach Townhouse",
     "propertyAddress": "159 Highland Avenue, Manhattan Beach, CA 90266",
+    "propertyPurchaseDate": "2024-01-10",
+    "propertyStatus": "Pending - purchase",
     "transactionType": "Purchase",
     "status": "New",
     "estimatedClosingDate": "2024-03-25",

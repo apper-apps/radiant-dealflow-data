@@ -7,8 +7,11 @@ import FormField from "@/components/molecules/FormField";
 import ApperIcon from "@/components/ApperIcon";
 
 const CreateTransactionModal = ({ isOpen, onClose }) => {
-  const [formData, setFormData] = useState({
+const [formData, setFormData] = useState({
+    propertyName: "",
     propertyAddress: "",
+    propertyPurchaseDate: "",
+    propertyStatus: "Pending - purchase",
     transactionType: "Sale",
     estimatedClosingDate: ""
   });
@@ -33,6 +36,10 @@ const CreateTransactionModal = ({ isOpen, onClose }) => {
   const validateForm = () => {
     const newErrors = {};
     
+if (!formData.propertyName.trim()) {
+      newErrors.propertyName = "Property name is required";
+    }
+
     if (!formData.propertyAddress.trim()) {
       newErrors.propertyAddress = "Property address is required";
     }
@@ -68,7 +75,10 @@ const CreateTransactionModal = ({ isOpen, onClose }) => {
       
       // Reset form
       setFormData({
+propertyName: "",
         propertyAddress: "",
+        propertyPurchaseDate: "",
+        propertyStatus: "Pending - purchase",
         transactionType: "Sale",
         estimatedClosingDate: ""
       });
@@ -88,7 +98,10 @@ const CreateTransactionModal = ({ isOpen, onClose }) => {
   const handleClose = () => {
     if (!isSubmitting) {
       setFormData({
+propertyName: "",
         propertyAddress: "",
+        propertyPurchaseDate: "",
+        propertyStatus: "Pending - purchase",
         transactionType: "Sale",
         estimatedClosingDate: ""
       });
@@ -133,7 +146,17 @@ const CreateTransactionModal = ({ isOpen, onClose }) => {
                 </button>
               </div>
               
-              <form onSubmit={handleSubmit} className="p-6 space-y-4">
+<form onSubmit={handleSubmit} className="p-6 space-y-4">
+                <FormField
+                  label="Property Name"
+                  required
+                  value={formData.propertyName}
+                  onChange={(e) => handleInputChange("propertyName", e.target.value)}
+                  placeholder="Enter property name"
+                  error={errors.propertyName}
+                  disabled={isSubmitting}
+                />
+
                 <FormField
                   label="Property Address"
                   required
@@ -143,6 +166,30 @@ const CreateTransactionModal = ({ isOpen, onClose }) => {
                   error={errors.propertyAddress}
                   disabled={isSubmitting}
                 />
+
+                <FormField
+                  label="Property Purchase Date"
+                  type="date"
+                  value={formData.propertyPurchaseDate}
+                  onChange={(e) => handleInputChange("propertyPurchaseDate", e.target.value)}
+                  error={errors.propertyPurchaseDate}
+                  disabled={isSubmitting}
+                />
+
+                <FormField
+                  label="Property Status"
+                  component="select"
+                  required
+                  value={formData.propertyStatus}
+                  onChange={(e) => handleInputChange("propertyStatus", e.target.value)}
+                  error={errors.propertyStatus}
+                  disabled={isSubmitting}
+                >
+                  <option value="Pending - purchase">Pending - purchase</option>
+                  <option value="Rehab">Rehab</option>
+                  <option value="Listed">Listed</option>
+                  <option value="Pending - sale">Pending - sale</option>
+                </FormField>
                 
                 <FormField
                   label="Transaction Type"

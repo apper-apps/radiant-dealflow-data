@@ -11,7 +11,10 @@ import ApperIcon from "@/components/ApperIcon";
 const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
+propertyName: "",
     propertyAddress: "",
+    propertyPurchaseDate: "",
+    propertyStatus: "Pending - purchase",
     transactionType: "Sale",
     purchasePrice: "",
     estimatedClosingDate: "",
@@ -23,8 +26,11 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
 
   useEffect(() => {
     if (transaction) {
-      setFormData({
+setFormData({
+        propertyName: transaction.propertyName || "",
         propertyAddress: transaction.propertyAddress || "",
+        propertyPurchaseDate: transaction.propertyPurchaseDate || "",
+        propertyStatus: transaction.propertyStatus || "Pending - purchase",
         transactionType: transaction.transactionType || "Sale",
         purchasePrice: transaction.purchasePrice || "",
         estimatedClosingDate: transaction.estimatedClosingDate || "",
@@ -51,7 +57,10 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
 
   const validateForm = () => {
     const newErrors = {};
-    
+if (!formData.propertyName.trim()) {
+      newErrors.propertyName = "Property name is required";
+    }
+
     if (!formData.propertyAddress.trim()) {
       newErrors.propertyAddress = "Property address is required";
     }
@@ -63,7 +72,6 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
     if (!formData.estimatedClosingDate) {
       newErrors.estimatedClosingDate = "Estimated closing date is required";
     }
-    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -210,7 +218,7 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
               <div className="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
                 <div className="space-y-6">
                   {/* Status Badge */}
-                  <div className="flex items-center justify-between">
+<div className="flex items-center justify-between">
                     <Badge size="md" className="text-sm">
                       {formData.status}
                     </Badge>
@@ -224,6 +232,27 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
                   <div className="space-y-4">
                     <h3 className="text-lg font-medium text-gray-900">Property Information</h3>
                     
+                    {/* Property Name */}
+                    {isEditing ? (
+                      <FormField
+                        label="Property Name"
+                        required
+                        value={formData.propertyName}
+                        onChange={(e) => handleInputChange("propertyName", e.target.value)}
+                        placeholder="Enter property name"
+                        error={errors.propertyName}
+                        disabled={isSubmitting}
+                      />
+                    ) : (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Property Name
+                        </label>
+                        <p className="text-gray-900">{formData.propertyName}</p>
+                      </div>
+                    )}
+
+                    {/* Property Address */}
                     {isEditing ? (
                       <FormField
                         label="Property Address"
@@ -240,6 +269,52 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
                           Property Address
                         </label>
                         <p className="text-gray-900">{formData.propertyAddress}</p>
+                      </div>
+                    )}
+
+                    {/* Property Purchase Date */}
+                    {isEditing ? (
+                      <FormField
+                        label="Property Purchase Date"
+                        type="date"
+                        value={formData.propertyPurchaseDate}
+                        onChange={(e) => handleInputChange("propertyPurchaseDate", e.target.value)}
+                        error={errors.propertyPurchaseDate}
+                        disabled={isSubmitting}
+                      />
+                    ) : (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Property Purchase Date
+                        </label>
+                        <p className="text-gray-900">
+                          {formData.propertyPurchaseDate ? formatDate(formData.propertyPurchaseDate) : "Not specified"}
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Property Status */}
+                    {isEditing ? (
+                      <FormField
+                        label="Property Status"
+                        component="select"
+                        required
+                        value={formData.propertyStatus}
+                        onChange={(e) => handleInputChange("propertyStatus", e.target.value)}
+                        error={errors.propertyStatus}
+                        disabled={isSubmitting}
+                      >
+                        <option value="Pending - purchase">Pending - purchase</option>
+                        <option value="Rehab">Rehab</option>
+                        <option value="Listed">Listed</option>
+                        <option value="Pending - sale">Pending - sale</option>
+                      </FormField>
+                    ) : (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Property Status
+                        </label>
+                        <p className="text-gray-900">{formData.propertyStatus}</p>
                       </div>
                     )}
                   </div>
@@ -275,9 +350,9 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
                       )}
 
                       {/* Status */}
-                      {isEditing && (
+{isEditing && (
                         <FormField
-                          label="Status"
+                          label="Transaction Status"
                           component="select"
                           required
                           value={formData.status}
@@ -308,7 +383,7 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
                         error={errors.purchasePrice}
                         disabled={isSubmitting}
                       />
-                    ) : (
+) : (
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                           Purchase Price
@@ -418,8 +493,11 @@ const TransactionDetailModal = ({ isOpen, onClose, transaction }) => {
                           setErrors({});
                           // Reset form data
                           if (transaction) {
-                            setFormData({
+setFormData({
+                              propertyName: transaction.propertyName || "",
                               propertyAddress: transaction.propertyAddress || "",
+                              propertyPurchaseDate: transaction.propertyPurchaseDate || "",
+                              propertyStatus: transaction.propertyStatus || "Pending - purchase",
                               transactionType: transaction.transactionType || "Sale",
                               purchasePrice: transaction.purchasePrice || "",
                               estimatedClosingDate: transaction.estimatedClosingDate || "",

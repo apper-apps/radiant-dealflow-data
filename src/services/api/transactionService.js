@@ -26,7 +26,8 @@ export const transactionService = {
     const newId = Math.max(...transactions.map(t => t.Id)) + 1;
     const newTransaction = {
       Id: newId,
-      ...transactionData,
+...transactionData,
+      propertyStatus: transactionData.propertyStatus || "Pending - purchase",
       status: "New",
       createdAt: new Date().toISOString().split("T")[0],
       updatedAt: new Date().toISOString().split("T")[0]
@@ -43,7 +44,7 @@ export const transactionService = {
     }
     transactions[index] = {
       ...transactions[index],
-      ...updateData,
+...updateData,
       updatedAt: new Date().toISOString().split("T")[0]
     };
     return { ...transactions[index] };
@@ -62,7 +63,7 @@ export const transactionService = {
   async getStats() {
     await delay(200);
     const stats = {
-      totalActive: transactions.filter(t => t.status !== "Completed").length,
+totalActive: transactions.filter(t => t.status !== "Completed").length,
       closingThisMonth: transactions.filter(t => {
         const closingDate = new Date(t.estimatedClosingDate);
         const now = new Date();

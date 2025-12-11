@@ -38,8 +38,8 @@ return (
             />
           </div>
           <div>
-            <h3 className="font-medium text-gray-900 text-sm">
-              {transaction.propertyAddress}
+<h3 className="font-medium text-gray-900 text-sm">
+              {transaction.propertyName}
             </h3>
             <p className="text-xs text-gray-500 mt-1">
               {transaction.transactionType}
